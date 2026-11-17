@@ -4,13 +4,13 @@ A "viewer mode" for [PdfCraft](https://github.com/storytold/pdfcraft): a strippe
 
 PdfCraft has no plugin system, so this ships as a source patch.
 
-## Status: work in progress, not usable yet
+## Status: works, tested in the headless UI harness (17 Nov 2026)
 
-This is the first version, imported as it was. It compiles, but it has not been run in the app and **nothing switches viewer mode on yet**:
-
-- Done: a `ViewerMode` state, a `viewer_tab_strip` (home, open, one tab per open PDF, "Exit Viewer"), and a render path in `app.rs` that shows only the strip and the page area.
-- Missing: a button or shortcut that sets `viewer_mode.enabled = true` (`toggle_viewer_mode` exists but nothing calls it), tab close buttons, page and tab keyboard shortcuts, and any UI test.
-- Needs cleaning: `viewer_mode.rs` is not declared as a module (the state type is duplicated in `state.rs`); the patch adds a Discord link button to the strip and a `webbrowser` dependency for it; `crates/ui-egui/Cargo.toml` also gains a block of unrelated dependencies under the wasm target.
+- **Turn on:** the eye button in the title bar, View ▸ Viewer mode, or Ctrl+E (⌘E on macOS). **Turn off:** the crossed-out eye in the strip, Ctrl+E or Esc.
+- **Tabs:** click to switch; close with the ×, a middle click, Ctrl+W or the right-click menu (unsaved changes ask first); Ctrl+Tab / Ctrl+Shift+Tab step through them.
+- **Pages:** Page Up/Down, Home/End, arrows and the wheel work as usual.
+- It is one registered command (`view.viewer_mode`), so it is in the palette and the shortcuts list too.
+- Four UI tests in `crates/ui-egui/tests/it/viewer_mode.rs` pass. Not yet tried by hand in a real window.
 
 ## Apply
 
@@ -24,7 +24,7 @@ git apply /path/to/patches/0001-viewer-mode.patch
 cargo check -p pdfcraft-ui-egui
 ```
 
-`cargo check -p pdfcraft-ui-egui` passes with one unused-variable warning (checked 17 Nov 2026).
+`cargo build --release -p pdfcraft` and the four viewer-mode tests pass (17 Nov 2026).
 
 ## License
 

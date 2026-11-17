@@ -1,489 +1,19 @@
-diff --git a/Cargo.lock b/Cargo.lock
-index 9746066..2812f14 100644
---- a/Cargo.lock
-+++ b/Cargo.lock
-@@ -108,7 +108,7 @@ dependencies = [
-  "accesskit_macos",
-  "accesskit_unix",
-  "accesskit_windows",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "winit",
- ]
- 
-@@ -191,7 +191,7 @@ dependencies = [
-  "android-properties",
-  "bitflags 2.13.2",
-  "cc",
-- "jni",
-+ "jni 0.22.4",
-  "libc",
-  "log",
-  "ndk",
-@@ -934,6 +934,12 @@ dependencies = [
-  "shlex",
- ]
- 
-+[[package]]
-+name = "cesu8"
-+version = "1.1.0"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "6d43a04d8753f35258c91f8ec639f792891f748a1edbd759cf1dcea3382ad83c"
-+
- [[package]]
- name = "cfg-if"
- version = "1.0.5"
-@@ -1951,7 +1957,7 @@ dependencies = [
-  "percent-encoding",
-  "pollster 1.0.1",
-  "profiling",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "ron",
-  "send_wrapper",
-  "serde",
-@@ -2022,11 +2028,11 @@ dependencies = [
-  "objc2-ui-kit 0.3.2",
-  "parking_lot",
-  "profiling",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "serde",
-  "smithay-clipboard",
-  "web-time",
-- "webbrowser",
-+ "webbrowser 1.2.4",
-  "windows-sys 0.61.2",
-  "winit",
- ]
-@@ -2768,7 +2774,7 @@ dependencies = [
-  "objc2-core-foundation",
-  "objc2-foundation 0.3.2",
-  "once_cell",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "wayland-sys",
-  "windows-sys 0.52.0",
-  "x11-dl",
-@@ -2782,7 +2788,7 @@ checksum = "85edca7075f8fc728f28cb8fbb111a96c3b89e930574369e3e9c27eb75d3788f"
- dependencies = [
-  "cfg_aliases",
-  "glutin",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "winit",
- ]
- 
-@@ -3044,6 +3050,15 @@ dependencies = [
-  "digest 0.11.3",
- ]
- 
-+[[package]]
-+name = "home"
-+version = "0.5.12"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "cc627f471c528ff0c4a49e1d5e60450c8f6461dd6d10ba9dcd3a61d3dff7728d"
-+dependencies = [
-+ "windows-sys 0.61.2",
-+]
-+
- [[package]]
- name = "http"
- version = "1.5.0"
-@@ -3482,6 +3497,22 @@ version = "1.0.18"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682"
- 
-+[[package]]
-+name = "jni"
-+version = "0.21.1"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "1a87aa2bb7d2af34197c04845522473242e1aa17c12f4935d5856491a7fb8c97"
-+dependencies = [
-+ "cesu8",
-+ "cfg-if",
-+ "combine",
-+ "jni-sys 0.3.1",
-+ "log",
-+ "thiserror 1.0.69",
-+ "walkdir",
-+ "windows-sys 0.45.0",
-+]
-+
- [[package]]
- name = "jni"
- version = "0.22.4"
-@@ -3758,6 +3789,15 @@ version = "0.1.3"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "4050469837a6ff301cd14c1f8f24f88549e6d548f24f64e2148eb0f72cebc51f"
- 
-+[[package]]
-+name = "malloc_buf"
-+version = "0.0.6"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "62bb907fe88d54d8d9ce32a3cceab4218ed2f6b7d35617cafe9adf84e43919cb"
-+dependencies = [
-+ "libc",
-+]
-+
- [[package]]
- name = "md-5"
- version = "0.10.6"
-@@ -3944,7 +3984,7 @@ dependencies = [
-  "log",
-  "ndk-sys",
-  "num_enum",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "thiserror 1.0.69",
- ]
- 
-@@ -4067,6 +4107,15 @@ dependencies = [
-  "libc",
- ]
- 
-+[[package]]
-+name = "objc"
-+version = "0.2.7"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "915b1b472bc21c53464d6c8461c9d3af805ba1ef837e1cac254428f4a77177b1"
-+dependencies = [
-+ "malloc_buf",
-+]
-+
- [[package]]
- name = "objc-sys"
- version = "0.3.5"
-@@ -4550,7 +4599,7 @@ dependencies = [
-  "pdfcraft-platform",
-  "pdfcraft-ui-egui",
-  "pollster 1.0.1",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "serde_json",
-  "uds_windows",
-  "wayland-client",
-@@ -5084,6 +5133,7 @@ dependencies = [
-  "wasm-bindgen-futures",
-  "web-sys",
-  "web-time",
-+ "webbrowser 0.8.15",
-  "winsafe",
-  "xattr",
-  "zeroize",
-@@ -5753,6 +5803,12 @@ version = "1.8.0"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "a611d15b50743feb4c76b7d03edcb0e64f399c26961e4efe6975bc398be6aa3d"
- 
-+[[package]]
-+name = "raw-window-handle"
-+version = "0.5.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "f2ff9a1f06a88b01621b7ae906ef0211290d1c8a168a15542486a8f61c0833b9"
-+
- [[package]]
- name = "raw-window-handle"
- version = "0.6.2"
-@@ -5987,7 +6043,7 @@ dependencies = [
-  "objc2-foundation 0.3.2",
-  "percent-encoding",
-  "pollster 0.4.0",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "wasm-bindgen",
-  "wasm-bindgen-futures",
-  "wayland-backend",
-@@ -6296,7 +6352,7 @@ checksum = "1167586491e2b18b8bfbb293e8180ec17c201c4f076d7cb3070ca964e7598f98"
- dependencies = [
-  "core-foundation 0.10.1",
-  "core-foundation-sys",
-- "jni",
-+ "jni 0.22.4",
-  "log",
-  "once_cell",
-  "rustls",
-@@ -7199,7 +7255,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "32497e9a4c7b38532efcdebeef879707aa9f794296a4f0244f6f69e9bc8574bd"
- dependencies = [
-  "fastrand",
-- "getrandom 0.3.4",
-+ "getrandom 0.4.3",
-  "once_cell",
-  "rustix 1.1.6",
-  "windows-sys 0.61.2",
-@@ -8101,13 +8157,30 @@ dependencies = [
-  "wasm-bindgen",
- ]
- 
-+[[package]]
-+name = "webbrowser"
-+version = "0.8.15"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "db67ae75a9405634f5882791678772c94ff5f16a66535aae186e26aa0841fc8b"
-+dependencies = [
-+ "core-foundation 0.9.4",
-+ "home",
-+ "jni 0.21.1",
-+ "log",
-+ "ndk-context",
-+ "objc",
-+ "raw-window-handle 0.5.2",
-+ "url",
-+ "web-sys",
-+]
-+
- [[package]]
- name = "webbrowser"
- version = "1.2.4"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "62c35be770821a214dbc362fc26908c853e776c0004294d0b10b8a6bad582f94"
- dependencies = [
-- "jni",
-+ "jni 0.22.4",
-  "log",
-  "ndk-context",
-  "objc2 0.6.5",
-@@ -8157,7 +8230,7 @@ dependencies = [
-  "parking_lot",
-  "portable-atomic",
-  "profiling",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "smallvec",
-  "static_assertions",
-  "wasm-bindgen",
-@@ -8190,7 +8263,7 @@ dependencies = [
-  "parking_lot",
-  "portable-atomic",
-  "profiling",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "rustc-hash 1.1.0",
-  "smallvec",
-  "thiserror 2.0.21",
-@@ -8279,7 +8352,7 @@ dependencies = [
-  "portable-atomic-util",
-  "profiling",
-  "range-alloc",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "raw-window-metal",
-  "renderdoc-sys",
-  "smallvec",
-@@ -8316,7 +8389,7 @@ dependencies = [
-  "js-sys",
-  "log",
-  "naga-types",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "static_assertions",
-  "web-sys",
- ]
-@@ -8442,13 +8515,22 @@ dependencies = [
-  "windows-link",
- ]
- 
-+[[package]]
-+name = "windows-sys"
-+version = "0.45.0"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "75283be5efb2831d37ea142365f009c02ec203cd29a3ebecbc093d52315b66d0"
-+dependencies = [
-+ "windows-targets 0.42.2",
-+]
-+
- [[package]]
- name = "windows-sys"
- version = "0.52.0"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "282be5f36a8ce781fad8c8ae18fa3f9beff57ec1b52cb3de0789201425d9a33d"
- dependencies = [
-- "windows-targets",
-+ "windows-targets 0.52.6",
- ]
- 
- [[package]]
-@@ -8457,7 +8539,7 @@ version = "0.59.0"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "1e38bc4d79ed67fd075bcc251a1c39b32a1776bbe92e5bef1f0bf1f8c531853b"
- dependencies = [
-- "windows-targets",
-+ "windows-targets 0.52.6",
- ]
- 
- [[package]]
-@@ -8469,20 +8551,35 @@ dependencies = [
-  "windows-link",
- ]
- 
-+[[package]]
-+name = "windows-targets"
-+version = "0.42.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "8e5180c00cd44c9b1c88adb3693291f1cd93605ded80c250a75d472756b4d071"
-+dependencies = [
-+ "windows_aarch64_gnullvm 0.42.2",
-+ "windows_aarch64_msvc 0.42.2",
-+ "windows_i686_gnu 0.42.2",
-+ "windows_i686_msvc 0.42.2",
-+ "windows_x86_64_gnu 0.42.2",
-+ "windows_x86_64_gnullvm 0.42.2",
-+ "windows_x86_64_msvc 0.42.2",
-+]
-+
- [[package]]
- name = "windows-targets"
- version = "0.52.6"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "9b724f72796e036ab90c1021d4780d4d3d648aca59e491e6b98e725b84e99973"
- dependencies = [
-- "windows_aarch64_gnullvm",
-- "windows_aarch64_msvc",
-- "windows_i686_gnu",
-+ "windows_aarch64_gnullvm 0.52.6",
-+ "windows_aarch64_msvc 0.52.6",
-+ "windows_i686_gnu 0.52.6",
-  "windows_i686_gnullvm",
-- "windows_i686_msvc",
-- "windows_x86_64_gnu",
-- "windows_x86_64_gnullvm",
-- "windows_x86_64_msvc",
-+ "windows_i686_msvc 0.52.6",
-+ "windows_x86_64_gnu 0.52.6",
-+ "windows_x86_64_gnullvm 0.52.6",
-+ "windows_x86_64_msvc 0.52.6",
- ]
- 
- [[package]]
-@@ -8494,18 +8591,36 @@ dependencies = [
-  "windows-link",
- ]
- 
-+[[package]]
-+name = "windows_aarch64_gnullvm"
-+version = "0.42.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "597a5118570b68bc08d8d59125332c54f1ba9d9adeedeef5b99b02ba2b0698f8"
-+
- [[package]]
- name = "windows_aarch64_gnullvm"
- version = "0.52.6"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "32a4622180e7a0ec044bb555404c800bc9fd9ec262ec147edd5989ccd0c02cd3"
- 
-+[[package]]
-+name = "windows_aarch64_msvc"
-+version = "0.42.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "e08e8864a60f06ef0d0ff4ba04124db8b0fb3be5776a5cd47641e942e58c4d43"
-+
- [[package]]
- name = "windows_aarch64_msvc"
- version = "0.52.6"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "09ec2a7bb152e2252b53fa7803150007879548bc709c039df7627cabbd05d469"
- 
-+[[package]]
-+name = "windows_i686_gnu"
-+version = "0.42.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "c61d927d8da41da96a81f029489353e68739737d3beca43145c8afec9a31a84f"
-+
- [[package]]
- name = "windows_i686_gnu"
- version = "0.52.6"
-@@ -8518,24 +8633,48 @@ version = "0.52.6"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "0eee52d38c090b3caa76c563b86c3a4bd71ef1a819287c19d586d7334ae8ed66"
- 
-+[[package]]
-+name = "windows_i686_msvc"
-+version = "0.42.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "44d840b6ec649f480a41c8d80f9c65108b92d89345dd94027bfe06ac444d1060"
-+
- [[package]]
- name = "windows_i686_msvc"
- version = "0.52.6"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "240948bc05c5e7c6dabba28bf89d89ffce3e303022809e73deaefe4f6ec56c66"
- 
-+[[package]]
-+name = "windows_x86_64_gnu"
-+version = "0.42.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "8de912b8b8feb55c064867cf047dda097f92d51efad5b491dfb98f6bbb70cb36"
-+
- [[package]]
- name = "windows_x86_64_gnu"
- version = "0.52.6"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "147a5c80aabfbf0c7d901cb5895d1de30ef2907eb21fbbab29ca94c5b08b1a78"
- 
-+[[package]]
-+name = "windows_x86_64_gnullvm"
-+version = "0.42.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "26d41b46a36d453748aedef1486d5c7a85db22e56aff34643984ea85514e94a3"
-+
- [[package]]
- name = "windows_x86_64_gnullvm"
- version = "0.52.6"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "24d5b23dc417412679681396f2b49f3de8c1473deb516bd34410872eff51ed0d"
- 
-+[[package]]
-+name = "windows_x86_64_msvc"
-+version = "0.42.2"
-+source = "registry+https://github.com/rust-lang/crates.io-index"
-+checksum = "9aec5da331524158c6d1a4ac0ab1541149c0b9505fde06423b02f5ef0106b9f0"
-+
- [[package]]
- name = "windows_x86_64_msvc"
- version = "0.52.6"
-@@ -8571,7 +8710,7 @@ dependencies = [
-  "orbclient",
-  "percent-encoding",
-  "pin-project",
-- "raw-window-handle",
-+ "raw-window-handle 0.6.2",
-  "redox_syscall 0.4.1",
-  "rustix 0.38.44",
-  "smithay-client-toolkit 0.19.2",
-diff --git a/crates/ui-egui/Cargo.toml b/crates/ui-egui/Cargo.toml
-index cca9683..cc2b011 100644
---- a/crates/ui-egui/Cargo.toml
-+++ b/crates/ui-egui/Cargo.toml
-@@ -62,6 +62,8 @@ getrandom = "0.4"
- arboard = { version = "3.6", default-features = false, features = ["image-data"] }
- # Waits for native file pickers off the UI thread (already in the tree through wgpu).
- pollster = "1.0"
-+# Open URLs in the default browser.
-+webbrowser = "0.8"
- 
- [target.'cfg(all(unix, not(target_os = "macos"), not(target_arch = "wasm32")))'.dependencies]
- # Discover configured font directories without linking libfontconfig or running a subprocess.
-@@ -91,6 +93,18 @@ wasm-bindgen-futures = "0.4"
- wasm-bindgen = "0.2"
- js-sys = "0.3"
- web-sys = { version = "0.3", features = ["Window", "Document", "Element", "HtmlElement", "HtmlAnchorElement", "Blob", "BlobPropertyBag", "Url", "HtmlIFrameElement", "HtmlImageElement", "HtmlCollection", "Node", "EventTarget", "Navigator", "RequestCache", "RequestInit", "Response", "Worker", "WorkerOptions", "WorkerType", "MessageEvent"] }
-+pdfcraft-xfa = { workspace = true }
-+# A content stream that inflates past the renderer's limits, for the cut-content notice test.
-+flate2 = { workspace = true }
-+egui_kittest = { workspace = true, features = ["eframe", "wgpu"] }
-+# Tests draw PdfCraft text without a system provider: the bundled and monochrome emoji faces must
-+# be enabled on the test graph itself (a dependency's dev-features do not propagate).
-+egui = { workspace = true, features = ["default_fonts", "monochrome_emoji_fonts"] }
-+image = { version = "0.25", default-features = false }
-+# Glyph-coverage test of the interface fonts; the same skrifa pdfcraft-fonts already uses.
-+skrifa = "0.44"
-+proptest = { workspace = true }
-+craft-update = { workspace = true }
- 
- [dev-dependencies]
- craft-update = { workspace = true }
+diff --git a/crates/engine/src/commands.rs b/crates/engine/src/commands.rs
+index eae8a53..05ed200 100644
+--- a/crates/engine/src/commands.rs
++++ b/crates/engine/src/commands.rs
+@@ -241,6 +241,9 @@ pub const COMMANDS: &[CommandSpec] = &[
+     c("edit.snapshot", "Take a snapshot", EDIT, None, Copying, "camera"),
+     c("view.full_screen", "Full screen mode", VIEW, Some(Shortcut::cmd("L")), Document, "maximize"),
+     c("view.read_mode", "Read mode", VIEW, Some(Shortcut { command: true, shift: false, mac_ctrl: true, key: "H" }), Document, "book-open"),
++    // A clean, tabs-only viewer for reading several PDFs at once: the tab strip and the pages, no
++    // menus, toolbars or panels. Esc leaves it, as it leaves full screen.
++    c("view.viewer_mode", "Viewer mode", VIEW, Some(Shortcut::cmd("E")), Nothing, "eye"),
+     // Split view (Acrobat's Window ▸ Split): the current document in two panes, or back to one;
+     // a tab's right-click menu also splits right or down with any tab.
+     c("view.split", "Split", VIEW, Some(Shortcut::cmd("\\")), Document, "columns-2"),
 diff --git a/crates/ui-egui/src/app.rs b/crates/ui-egui/src/app.rs
-index 6e4a52c..365a761 100644
+index 6e4a52c..ccab5c7 100644
 --- a/crates/ui-egui/src/app.rs
 +++ b/crates/ui-egui/src/app.rs
 @@ -328,6 +328,7 @@ impl PdfCraftApp {
@@ -508,11 +38,11 @@ index 6e4a52c..365a761 100644
      }
  
      /// The pages are covered, and no page key reaches them, a menu click's included: by a dialog or
-@@ -867,6 +873,24 @@ impl PdfCraftApp {
-             }
-             return;
+@@ -871,6 +877,24 @@ impl PdfCraftApp {
+         if self.draws_window_frame() {
+             window_controls::resize_edges(&ctx);
          }
-+        // Viewer mode: minimal UI with just tabs and document area
++        // Viewer mode: the tab strip and the pages, none of the rest of the chrome.
 +        if self.viewer_mode.enabled {
 +            chrome::viewer_tab_strip(self, ui);
 +            let t = theme::Tokens::get(&ctx);
@@ -530,19 +60,60 @@ index 6e4a52c..365a761 100644
 +            }
 +            return;
 +        }
-         self.sync_window_frame(&ctx);
-         if self.draws_window_frame() {
-             window_controls::resize_edges(&ctx);
+         chrome::tab_strip(self, ui);
+         // A document can hide the toolbars, the menu and the panels around it in its tab (ISO
+         // 32000-2 Table 147); the tab strip stays, and F8 brings the rest back (`viewer_prefs`).
+diff --git a/crates/ui-egui/src/app/keys.rs b/crates/ui-egui/src/app/keys.rs
+index 7471c2f..0149a54 100644
+--- a/crates/ui-egui/src/app/keys.rs
++++ b/crates/ui-egui/src/app/keys.rs
+@@ -50,6 +50,10 @@ impl PdfCraftApp {
+         if self.full_screen && self.combine_tab.preview.is_none() && self.page_keys.pressed(ctx, Key::Escape) {
+             self.set_full_screen(ctx, false);
+         }
++        // Esc leaves viewer mode, as it leaves full screen.
++        if self.viewer_mode.enabled && self.combine_tab.preview.is_none() && self.page_keys.pressed(ctx, Key::Escape) {
++            self.viewer_mode.enabled = false;
++        }
+         if let Some(i) = self.active {
+             if page_chords && chords {
+                 self.select_all_keys(i, ctx);
 diff --git a/crates/ui-egui/src/chrome.rs b/crates/ui-egui/src/chrome.rs
-index 4cc264e..83774f6 100644
+index 4cc264e..2247f52 100644
 --- a/crates/ui-egui/src/chrome.rs
 +++ b/crates/ui-egui/src/chrome.rs
-@@ -586,6 +586,90 @@ const MODE_BAR_RIGHT: f32 = 3.0 * 32.0 + 3.0 * 4.0 + 8.0;
+@@ -72,10 +72,10 @@ pub fn tab_strip(app: &mut PdfCraftApp, ui: &mut egui::Ui) {
+                     app.active = None;
+                     app.combine_tab.focused = false;
+                 }
+-                // Reserve the three icon buttons, Discord and their gaps outside the scrolling tabs.
++                // Reserve the four icon buttons, Discord and their gaps outside the scrolling tabs.
+                 let controls_width = ui.fonts_mut(|f| f.layout_no_wrap("Discord".into(), theme::medium(13.0), t.text).size().x)
+-                    + 3.0 * button
+-                    + 54.0
++                    + 4.0 * button
++                    + 58.0
+                     + window_controls::width(&controls.right);
+                 // Open stays in sight after the tabs: its icon, text and padding, and the gaps around it.
+                 let open_width = ui.fonts_mut(|f| f.layout_no_wrap(tl!("Open").into(), theme::medium(13.0), t.text).size().x) + 38.0 + 12.0;
+@@ -275,6 +275,10 @@ pub fn tab_strip(app: &mut PdfCraftApp, ui: &mut egui::Ui) {
+                     if icons::button(ui, "circle-help", button, false, tl!("Keyboard shortcuts")).clicked() {
+                         app.dialog = Some(Dialog::Shortcuts);
+                     }
++                    let tip = crate::commands::command_tip(ui.ctx(), tl!("Viewer mode: only tabs and pages ({key})"), "view.viewer_mode");
++                    if icons::button(ui, "eye", button, false, &tip).clicked() {
++                        app.execute("view.viewer_mode");
++                    }
+                     // One click to the community, from anywhere in the app.
+                     if widgets::ghost_button_sized(ui, "messages-square", "Discord", tab_h).on_hover_text(pdfcraft_engine::links::DISCORD).clicked() {
+                         app.execute("help.discord");
+@@ -586,6 +590,137 @@ const MODE_BAR_RIGHT: f32 = 3.0 * 32.0 + 3.0 * 4.0 + 8.0;
  /// Narrowest search field the mode bar shows; below it the field becomes an icon button.
  const MODE_BAR_SEARCH_MIN: f32 = 140.0;
  
-+/// Draw the viewer tab strip: minimal tab bar for the clean multi-PDF viewer.
-+/// Shows only document tabs and an "Exit Viewer" toggle button.
++/// Draw the viewer mode's strip: home, the document tabs (click, close button, middle click and
++/// right-click menu as in the full strip, scrolling when they don't fit), Open and the button that
++/// leaves viewer mode. Nothing else of the window's chrome shows.
 +pub fn viewer_tab_strip(app: &mut PdfCraftApp, ui: &mut egui::Ui) {
 +    let t = Tokens::get(ui.ctx());
 +    let mac = cfg!(target_os = "macos") && app.integrated_titlebar;
@@ -577,50 +148,96 @@ index 4cc264e..83774f6 100644
 +                    });
 +                    ui.add_space(window_controls::SIDE_GAP - 4.0);
 +                }
-+                // Home button
-+                if icons::button(ui, "house", button, app.active.is_none() && !app.combine_showing(), tl!("Home")).clicked() {
++                if icons::button(ui, "house", button, app.active.is_none(), tl!("Home")).clicked() {
 +                    app.active = None;
 +                    app.combine_tab.focused = false;
 +                }
-+                ui.add_space(8.0);
-+                // Open button
-+                if icons::button(ui, "file-plus", button, false, tl!("Open")).clicked() {
++                // The Open button, the exit button and the window controls stay outside the tabs.
++                let open_width = ui.fonts_mut(|f| f.layout_no_wrap(tl!("Open").into(), theme::medium(13.0), t.text).size().x) + 38.0 + 12.0;
++                let tabs_width = (ui.available_width() - button - open_width - 16.0 - window_controls::width(&controls.right)).max(0.0);
++                let tabs = app.tabs_in(Place::Main);
++                let natural: Vec<f32> = tabs.iter().filter_map(|&i| crate::canvas::tab_label(app, i)).map(|name| tab_natural_width(ui, &t, &name)).collect();
++                let gap = ui.spacing().item_spacing.x;
++                let cap = tab_cap(&natural, tabs_width, gap, TAB_MIN_WIDTH);
++                // Keyed by document, so the tab that comes forward scrolls into sight.
++                let state = (app.active_ids().map(|(_, id)| id), app.views.len());
++                let changed = ui.data_mut(|data| {
++                    let id = ui.scope_id().with("viewer_active_tab");
++                    let changed = data.get_temp::<(Option<pdfcraft_engine::DocId>, usize)>(id) != Some(state);
++                    data.insert_temp(id, state);
++                    changed
++                });
++                let mut action = None;
++                let mut close = None;
++                ui.scope(|ui| {
++                    ui.style_mut().always_scroll_the_only_direction = true;
++                    egui::ScrollArea::horizontal().id_salt("viewer_tabs").max_width(tabs_width).auto_shrink([true, true]).show(ui, |ui| {
++                        ui.horizontal_centered(|ui| {
++                            for &i in &tabs {
++                                let Some(doc) = app.session.get(app.views[i].id) else { continue };
++                                let Some(name) = crate::canvas::tab_label(app, i) else { continue };
++                                let dirty = doc.dirty;
++                                let file = (name != doc.name).then_some(doc.name.as_str());
++                                let response = tab(
++                                    ui,
++                                    TabSpec {
++                                        id: ui.scope_id().with(("viewer-tab", app.views[i].id)),
++                                        theme: &t,
++                                        icon: "file-text",
++                                        name: &name,
++                                        file,
++                                        dirty,
++                                        active: app.pane_front(Place::Main) == Some(i),
++                                        index: i,
++                                        cap,
++                                        height: tab_h,
++                                        draggable: false,
++                                    },
++                                    &mut close,
++                                );
++                                if changed && app.active == Some(i) {
++                                    response.scroll_to_me(Some(Align::Center));
++                                }
++                                response.context_menu(|ui| tab_menu(app, ui, i, &mut action));
++                                if response.clicked() {
++                                    app.active = Some(i);
++                                    app.combine_tab.focused = false;
++                                }
++                                // A middle click closes the tab; unsaved changes ask first.
++                                if response.middle_clicked() {
++                                    close = Some(i);
++                                }
++                            }
++                        });
++                    });
++                });
++                if let Some(i) = close
++                    && let Some(view) = app.views.get(i)
++                {
++                    action.get_or_insert(Action::Close(view.view_key()));
++                }
++                if let Some(action) = action {
++                    app.tab_action(action);
++                }
++                ui.add_space(4.0);
++                let tip = crate::commands::command_tip(ui.ctx(), tl!("Open a PDF ({key})"), "file.open");
++                if widgets::ghost_button_sized(ui, "plus", tl!("Open"), tab_h).on_hover_text(tip).clicked() {
 +                    app.open_dialog();
 +                }
-+                ui.add_space(8.0);
-+                // Tabs: show all open document tabs
-+                ui.spacing_mut().item_spacing.x = 2.0;
-+                for i in app.tabs_in(Place::Main) {
-+                    if let Some(name) = crate::canvas::tab_label(app, i) {
-+                        let is_active = app.active == Some(i);
-+                        let mut action = None;
-+                        let response = ui.selectable_label(is_active, name);
-+                        if response.clicked() {
-+                            action = Some(i);
-+                        }
-+                        if let Some(idx) = action {
-+                            app.active = Some(idx);
-+                            app.combine_tab.focused = false;
-+                        }
++                ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
++                    if !controls.right.is_empty() {
++                        let size = egui::vec2(window_controls::width(&controls.right) - window_controls::SIDE_GAP, window_controls::BUTTON);
++                        ui.allocate_ui_with_layout(size, Layout::left_to_right(Align::Center), |ui| {
++                            ui.spacing_mut().item_spacing.x = 0.0;
++                            window_controls::buttons(ui, &controls.right);
++                        });
++                        ui.add_space(window_controls::SIDE_GAP - 4.0);
 +                    }
-+                }
-+                // Discord button
-+                if icons::button(ui, "discord", button, false, "Discord").clicked() {
-+                    let _ = webbrowser::open("https://discord.gg/artcraft");
-+                }
-+                ui.add_space(8.0);
-+                // Exit viewer mode button
-+                if ui.button(tl!("Exit Viewer")).clicked() {
-+                    app.viewer_mode.enabled = false;
-+                }
-+                ui.add_space(8.0);
-+                // Window controls
-+                if !controls.right.is_empty() {
-+                    ui.scope(|ui| {
-+                        ui.spacing_mut().item_spacing.x = 0.0;
-+                        window_controls::buttons(ui, &controls.right);
-+                    });
-+                }
++                    let tip = crate::commands::command_tip(ui.ctx(), tl!("Leave viewer mode ({key} or Esc)"), "view.viewer_mode");
++                    if icons::button(ui, "eye-off", button, true, &tip).clicked() {
++                        app.execute("view.viewer_mode");
++                    }
++                });
 +            });
 +        });
 +}
@@ -628,6 +245,27 @@ index 4cc264e..83774f6 100644
  pub fn mode_bar(app: &mut PdfCraftApp, ui: &mut egui::Ui) {
      let t = Tokens::get(ui.ctx());
      // The document in the active tab may hide the menu or the tools (`crate::viewer_prefs`).
+@@ -943,7 +1078,7 @@ fn rail_view_menu(ui: &mut egui::Ui, view: &mut DocView) -> Option<&'static str>
+     ui.separator();
+     picked = page_display_menu(ui, view).or(picked);
+     ui.separator();
+-    for (id, label) in [("view.read_mode", "Read mode"), ("view.full_screen", "Full screen mode")] {
++    for (id, label) in [("view.read_mode", "Read mode"), ("view.full_screen", "Full screen mode"), ("view.viewer_mode", "Viewer mode")] {
+         if ui.button(tl!(label)).clicked() {
+             picked = Some(id);
+         }
+diff --git a/crates/ui-egui/src/commands.rs b/crates/ui-egui/src/commands.rs
+index e67fe36..1895bd1 100644
+--- a/crates/ui-egui/src/commands.rs
++++ b/crates/ui-egui/src/commands.rs
+@@ -346,6 +346,7 @@ impl PdfCraftApp {
+                 }
+             }
+             "view.read_mode" => self.switch_mode(if self.mode == Mode::Read { Mode::AllTools } else { Mode::Read }, false),
++            "view.viewer_mode" => self.toggle_viewer_mode(),
+             "view.split" => self.toggle_split(),
+             crate::viewer_prefs::TOGGLE => self.toggle_interface(),
+             "view.previous_view" | "view.next_view" => {
 diff --git a/crates/ui-egui/src/lib.rs b/crates/ui-egui/src/lib.rs
 index d77c7b1..e4c1e64 100644
 --- a/crates/ui-egui/src/lib.rs
@@ -647,6 +285,27 @@ index d77c7b1..e4c1e64 100644
 +    /// Viewer mode toggle: minimal UI for viewing multiple PDFs (tabs only, no chrome/panels).
 +    pub viewer_mode: ViewerMode,
  }
+diff --git a/crates/ui-egui/src/menus.rs b/crates/ui-egui/src/menus.rs
+index b697cd6..8f447ea 100644
+--- a/crates/ui-egui/src/menus.rs
++++ b/crates/ui-egui/src/menus.rs
+@@ -174,7 +174,7 @@ const DISPLAY: &[&str] = &[
+ const THEMES: &[&str] = &["view.theme.system", "view.theme.light", "view.theme.dark"];
+ const PANES: &[&str] = &["view.side_panel", "view.tools_pane", "view.split"];
+ const PANE_COMMANDS: &[&str] = &["comment.list", "form.fields", "ui.dock.reset"];
+-const MODES: &[&str] = &["view.full_screen", "view.read_mode", crate::viewer_prefs::TOGGLE];
++const MODES: &[&str] = &["view.full_screen", "view.read_mode", "view.viewer_mode", crate::viewer_prefs::TOGGLE];
+ const PAGES: &[&str] = &[
+     "page.organize",
+     SEP,
+@@ -512,6 +512,7 @@ impl PdfCraftApp {
+             "view.layout.cover" => Some(view.is_some_and(|v| v.cover)),
+             "view.full_screen" => Some(self.full_screen),
+             "view.read_mode" => Some(self.mode == crate::Mode::Read),
++            "view.viewer_mode" => Some(self.viewer_mode.enabled),
+             "view.side_panel" => Some(self.right.is_some()),
+             "view.tools_pane" => Some(self.left_open),
+             "view.split" => Some(self.panes.split.is_some()),
 diff --git a/crates/ui-egui/src/state.rs b/crates/ui-egui/src/state.rs
 index 8d524ad..39a3204 100644
 --- a/crates/ui-egui/src/state.rs
@@ -671,175 +330,159 @@ index 8d524ad..39a3204 100644
 +        self.enabled = !self.enabled;
 +    }
 +}
-diff --git a/crates/ui-egui/src/viewer_mode.rs b/crates/ui-egui/src/viewer_mode.rs
+diff --git a/crates/ui-egui/tests/it/main.rs b/crates/ui-egui/tests/it/main.rs
+index 03d673a..fe0fc7c 100644
+--- a/crates/ui-egui/tests/it/main.rs
++++ b/crates/ui-egui/tests/it/main.rs
+@@ -101,5 +101,6 @@ mod ui;
+ mod updates;
+ mod view;
+ mod viewer;
++mod viewer_mode;
+ mod viewer_prefs;
+ mod xfa;
+diff --git a/crates/ui-egui/tests/it/viewer_mode.rs b/crates/ui-egui/tests/it/viewer_mode.rs
 new file mode 100644
-index 0000000..98d94be
+index 0000000..d837931
 --- /dev/null
-+++ b/crates/ui-egui/src/viewer_mode.rs
-@@ -0,0 +1,165 @@
-+//! Viewer Mode - A clean, minimal multi-PDF viewer
-+//!
-+//! This module provides a streamlined UI for viewing multiple PDFs simultaneously,
-+//! similar to browser tabs. All chrome, panels, and tools are hidden for a clean view.
-+//! Toggle between Full UI and Viewer mode with the button in the tab strip.
++++ b/crates/ui-egui/tests/it/viewer_mode.rs
+@@ -0,0 +1,139 @@
++//! Viewer mode (`view.viewer_mode`): a tabs-and-pages window for reading several PDFs. A button in
++//! the title bar, ⌘E (Ctrl+E) and the View menu turn it on; Esc, the strip's button and ⌘E turn it
++//! off. Its tabs close with their ×, a middle click, ⌘W and the tab's menu, and Ctrl+Tab steps
++//! through them.
 +
-+use egui::{Color32, Margin, ScrollArea, Vec2, Ui, TextStyle};
++use egui::accesskit::Role;
++use egui::{Key, Modifiers};
++use egui_kittest::Harness;
++use egui_kittest::kittest::{NodeT, Queryable};
++use pdfcraft_ui_egui::PdfCraftApp;
 +
-+use crate::{chrome, panes, tiles_ui, viewer_prefs, PdfCraftApp, RECENT_FILES_DEFAULT};
-+use pdfcraft_engine::{DocId, RenderPool, Session};
-+use pdfcraft_render::{EffectiveScale, PageImage, PageRenderer, RenderConfig, RenderRequest, RequestKind};
++/// A one-page PDF.
++const PDF: &[u8] = b"%PDF-1.7
++1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
++2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
++3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 300 400] >> endobj
++trailer << /Root 1 0 R >>
++%%EOF";
 +
-+pub struct ViewerMode {
-+    pub enabled: bool,
-+}
-+
-+impl Default for ViewerMode {
-+    fn default() -> Self {
-+        Self { enabled: false }
-+    }
-+}
-+
-+impl ViewerMode {
-+    pub fn is_hidden(&self) -> bool {
-+        self.enabled
-+    }
-+
-+    pub fn toggle(&mut self) {
-+        self.enabled = !self.enabled;
-+    }
-+}
-+
-+impl PdfCraftApp {
-+    pub fn toggle_viewer_mode(&mut self) {
-+        self.viewer_mode.toggle();
-+    }
-+
-+    pub fn viewer_mode_hidden(&self) -> bool {
-+        self.viewer_mode.enabled
-+    }
-+}
-+
-+pub fn draw_viewer_tab_strip(app: &mut PdfCraftApp, ui: &mut egui::Ui) {
-+    let t = crate::theme::Tokens::get(ui.ctx());
-+    
-+    egui::TopBottomPanel::top("viewer_tab_strip")
-+        .exact_height(36.0)
-+        .frame(egui::Frame::none().fill(t.titlebar))
-+        .show(ui, |ui| {
-+            ui.horizontal(|ui| {
-+                ui.add_space(8.0);
-+                
-+                ui.label("Tabs:");
-+                ui.add_space(8.0);
-+                
-+                ui.vertical(|ui| {
-+                    ui.set_width(400.0);
-+                    ScrollArea::horizontal()
-+                        .lag_to_scroll(false)
-+                        .show_scrollbar(false)
-+                        .show(ui, |ui| {
-+                            ui.horizontal(|ui| {
-+                                ui.add_space(4.0);
-+                                
-+                                if let Some(active) = app.active {
-+                                    if let Some(label) = crate::canvas::tab_label(app, active) {
-+                                        if ui.button(&label).clicked() {
-+                                            app.active_tabs.focus();
-+                                        }
-+                                    }
-+                                }
-+                                
-+                                for (i, view) in app.views.iter().enumerate() {
-+                                    if i == app.active.unwrap_or(usize::MAX) {
-+                                        continue;
-+                                    }
-+                                    if let Some(label) = crate::canvas::tab_label(app, i) {
-+                                        let is_open = ui.button(&label).clicked();
-+                                        if is_open {
-+                                            app.active = Some(i);
-+                                        }
-+                                    }
-+                                }
-+                            });
-+                        });
-+                });
-+                
-+                ui.add_space(12.0);
-+                ui.separator();
-+                ui.add_space(12.0);
-+                
-+                if ui.button("Exit Viewer").clicked() {
-+                    app.viewer_mode.enabled = false;
-+                }
-+                
-+                ui.add_space(8.0);
-+                
-+                if ui.button("Open…").clicked() {
-+                    let _ = app.request_open_files(None);
-+                }
-+            });
-+        });
-+}
-+
-+pub fn draw_viewer_document_area(app: &mut PdfCraftApp, ui: &mut egui::Ui, doc_index: usize) {
-+    let Some(active) = app.active else {
-+        ui.label("No document open. Click \"Open\" or drag PDFs onto the window.");
-+        return;
-+    };
-+    
-+    if doc_index != active {
-+        return;
-+    }
-+    
-+    let Some(view) = app.views.get(active) else { return };
-+    let Some(doc) = app.session.get(view.id) else { return };
-+    
-+    let max_texture_size = ui.ctx().max_texture_size().unwrap_or(4096) as u32;
-+    
-+    if let Ok(pixmap) = app.request_page_image(
-+        view.id,
-+        view.current_page,
-+        96.0 * view.zoom as f64,
-+        max_texture_size,
-+    ) {
-+        let texture = ui.ctx().load_texture(
-+            &format!("viewer_page_{}", view.current_page),
-+            &pixmap,
-+            egui::TextureOptions {
-+                mag_filter: egui::FilterMode::Linear,
-+                min_filter: egui::FilterMode::Linear,
-+                wrap: egui::Wrapping::Clamp,
-+            },
-+        );
-+        
-+        let available = ui.available_size();
-+        let image = egui::image::WaitForTexture::new(&texture);
-+        
-+        ui.add(image);
-+        
-+        ui.add_space(10.0);
-+        draw_viewer_navigation(ui, view);
-+    }
-+}
-+
-+fn draw_viewer_navigation(ui: &mut egui::Ui, view: &crate::canvas::DocView) {
-+    ui.horizontal(|ui| {
-+        if ui.button("Prev").disabled(view.current_page == 0).clicked() {
-+            if view.current_page > 0 {
-+                let _ = ui.ctx().send_viewport_cmd(egui::ViewportCommand::None);
-+            }
++fn harness(names: &[&'static str]) -> Harness<'static, PdfCraftApp> {
++    let names = names.to_vec();
++    let mut h = Harness::builder().with_size(egui::vec2(1400.0, 900.0)).build_eframe(move |_cc| {
++        let mut app = PdfCraftApp::new();
++        app.set_option("language", "en").unwrap();
++        for name in names {
++            app.open_bytes(name, None, PDF.to_vec()).expect("opens");
 +        }
-+        ui.add_space(10.0);
-+        ui.label(format!("{} / {}", view.current_page + 1, view.page_count()));
-+        ui.add_space(10.0);
-+        if ui.button("Next").disabled(view.current_page >= view.page_count() - 1).clicked() {
-+            if view.current_page < view.page_count() - 1 {
-+                let _ = ui.ctx().send_viewport_cmd(egui::ViewportCommand::None);
-+            }
-+        }
-+        ui.add_space(20.0);
-+        let zoom_label = format!("{:.0}%", view.zoom * 100.0);
-+        ui.label(&zoom_label);
++        app
 +    });
++    h.run_steps(4);
++    h
 +}
-\ No newline at end of file
++
++fn tab_names(h: &Harness<'static, PdfCraftApp>) -> Vec<String> {
++    let mut tabs: Vec<_> = h.query_all_by_role(Role::Tab).map(|t| (t.rect().left(), t.accesskit_node().label().unwrap_or_default().to_string())).collect();
++    tabs.sort_by(|a, b| a.0.total_cmp(&b.0));
++    tabs.into_iter().map(|(_, name)| name).collect()
++}
++
++fn click_at(h: &mut Harness<'static, PdfCraftApp>, at: egui::Pos2) {
++    h.hover_at(at);
++    h.run_steps(1);
++    for pressed in [true, false] {
++        h.event(egui::Event::PointerButton { pos: at, button: egui::PointerButton::Primary, pressed, modifiers: Modifiers::NONE });
++        h.run_steps(1);
++    }
++    h.run_steps(2);
++}
++
++#[test]
++fn the_title_bar_button_the_shortcut_and_escape_switch_viewer_mode() {
++    let mut h = harness(&["a.pdf", "b.pdf"]);
++    assert!(!h.state().viewer_mode.enabled);
++    // The title bar's button.
++    h.get_by_label_contains("Viewer mode").click();
++    h.run_steps(3);
++    assert!(h.state().viewer_mode.enabled, "the title bar's button turns it on");
++    assert_eq!(tab_names(&h), ["a.pdf", "b.pdf"], "the tabs stay");
++    // Ctrl+E leaves it and enters it again.
++    h.key_press_modifiers(Modifiers::COMMAND, Key::E);
++    h.run_steps(3);
++    assert!(!h.state().viewer_mode.enabled, "Ctrl+E leaves it");
++    h.key_press_modifiers(Modifiers::COMMAND, Key::E);
++    h.run_steps(3);
++    assert!(h.state().viewer_mode.enabled, "and enters it");
++    // Esc leaves it.
++    h.key_press(Key::Escape);
++    h.run_steps(3);
++    assert!(!h.state().viewer_mode.enabled, "Esc leaves it");
++    // The strip's own button leaves it too.
++    h.state_mut().execute("view.viewer_mode");
++    h.run_steps(3);
++    h.get_by_label_contains("Leave viewer mode").click();
++    h.run_steps(3);
++    assert!(!h.state().viewer_mode.enabled, "the strip's button leaves it");
++}
++
++#[test]
++fn viewer_mode_tabs_close_and_step_with_the_keyboard() {
++    let mut h = harness(&["a.pdf", "b.pdf", "c.pdf"]);
++    h.state_mut().execute("view.viewer_mode");
++    h.run_steps(3);
++    assert_eq!(h.state().active, Some(2));
++    // Ctrl+Tab and Ctrl+Shift+Tab wrap around the tabs.
++    h.key_press_modifiers(Modifiers::CTRL, Key::Tab);
++    h.run_steps(3);
++    assert_eq!(h.state().active, Some(0), "Ctrl+Tab wraps to the first tab");
++    h.key_press_modifiers(Modifiers::CTRL | Modifiers::SHIFT, Key::Tab);
++    h.run_steps(3);
++    assert_eq!(h.state().active, Some(2), "Ctrl+Shift+Tab steps back");
++    // Ctrl+W closes the tab in front.
++    h.key_press_modifiers(Modifiers::COMMAND, Key::W);
++    h.run_steps(3);
++    assert_eq!(tab_names(&h), ["a.pdf", "b.pdf"]);
++    assert!(h.state().viewer_mode.enabled, "closing a tab stays in viewer mode");
++}
++
++#[test]
++fn viewer_mode_tabs_close_with_their_button_and_their_menu() {
++    let mut h = harness(&["a.pdf", "b.pdf", "c.pdf"]);
++    h.state_mut().execute("view.viewer_mode");
++    h.run_steps(3);
++    // The × sits 16 pt in from the tab's right edge.
++    let b = h.get_by_role_and_label(Role::Tab, "b.pdf").rect();
++    click_at(&mut h, egui::pos2(b.right() - 16.0, b.center().y));
++    assert_eq!(tab_names(&h), ["a.pdf", "c.pdf"], "the × closes its own tab");
++    assert!(h.state().viewer_mode.enabled);
++    h.get_by_role_and_label(Role::Tab, "a.pdf").click_secondary();
++    h.run_steps(2);
++    h.get_by_label("Close Tab").click();
++    h.run_steps(3);
++    assert_eq!(tab_names(&h), ["c.pdf"], "the tab's menu closes it");
++}
++
++#[test]
++fn viewer_mode_pages_turn_with_the_page_keys() {
++    let three = String::from_utf8(PDF.to_vec())
++        .unwrap()
++        .replace("/Kids [3 0 R] /Count 1", "/Kids [3 0 R 4 0 R 5 0 R] /Count 3")
++        .replace("trailer", "4 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 300 400] >> endobj\n5 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 300 400] >> endobj\ntrailer")
++        .into_bytes();
++    let mut h = Harness::builder().with_size(egui::vec2(1400.0, 900.0)).build_eframe(move |_cc| {
++        let mut app = PdfCraftApp::new();
++        app.set_option("language", "en").unwrap();
++        app.open_bytes("three.pdf", None, three).expect("opens");
++        app
++    });
++    h.run_steps(4);
++    h.state_mut().execute("view.viewer_mode");
++    h.run_steps(3);
++    let page = |h: &Harness<'static, PdfCraftApp>| h.state().views[0].current;
++    assert_eq!(page(&h), 0);
++    h.key_press(Key::End);
++    h.run_steps(3);
++    assert_eq!(page(&h), 2, "End goes to the last page");
++    h.key_press(Key::Home);
++    h.run_steps(3);
++    assert_eq!(page(&h), 0, "Home goes to the first page");
++}
