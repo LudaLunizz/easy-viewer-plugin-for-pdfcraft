@@ -4,13 +4,13 @@ A "viewer mode" for [PdfCraft](https://github.com/storytold/pdfcraft): a strippe
 
 PdfCraft has no plugin system, so this ships as a source patch.
 
-## Status: works, tested in the headless UI harness (17 Nov 2026)
+## Status: v0.1.0, works; tested in the headless UI harness and by hand in a real window (19 Nov 2026)
 
 - **Turn on:** the eye button in the title bar, View ▸ Viewer mode, or Ctrl+E (⌘E on macOS). **Turn off:** the crossed-out eye in the strip, Ctrl+E or Esc.
 - **Tabs:** click to switch; close with the ×, a middle click, Ctrl+W or the right-click menu (unsaved changes ask first); Ctrl+Tab / Ctrl+Shift+Tab step through them.
 - **Pages:** Page Up/Down, Home/End, arrows and the wheel work as usual.
 - It is one registered command (`view.viewer_mode`), so it is in the palette and the shortcuts list too.
-- Four UI tests in `crates/ui-egui/tests/it/viewer_mode.rs` pass. Not yet tried by hand in a real window.
+- Four UI tests in `crates/ui-egui/tests/it/viewer_mode.rs` pass. Tried by hand in a real window by the maintainer: no issues found.
 
 ## Apply
 
