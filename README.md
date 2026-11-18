@@ -14,17 +14,17 @@ PdfCraft has no plugin system, so this ships as a source patch.
 
 ## Apply
 
-Made against PdfCraft `storytold/pdfcraft` at commit `a499493` (workspace version 0.21.1).
+Made against PdfCraft `storytold/pdfcraft` at commit `bad6ac7` (workspace version 0.21.1, 18 Nov 2026).
 
 ```bash
 git clone https://github.com/storytold/pdfcraft
 cd pdfcraft
-git checkout a499493
+git checkout bad6ac7
 git apply /path/to/patches/0001-viewer-mode.patch
 cargo check -p pdfcraft-ui-egui
 ```
 
-`cargo build --release -p pdfcraft` and the four viewer-mode tests pass (17 Nov 2026).
+The four viewer-mode tests pass on that commit (`cargo test -p pdfcraft-ui-egui --test it viewer_mode`, 18 Nov 2026). On a newer PdfCraft the patch may need small changes; the first one to expect is the Esc handling in `crates/ui-egui/src/app/keys.rs`.
 
 ## License
 
