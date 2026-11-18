@@ -28,4 +28,6 @@ The four viewer-mode tests pass on that commit (`cargo test -p pdfcraft-ui-egui 
 
 ## License
 
-MIT, see `LICENSE`. PdfCraft itself is MIT OR Apache-2.0.
+Dual-licensed, like PdfCraft itself: **MIT OR Apache-2.0**, at your option. See [`LICENSE-MIT`](LICENSE-MIT) and [`LICENSE-APACHE`](LICENSE-APACHE). Copyright (c) 2026 LudaLunizz.
+
+This is an unofficial patch. It is not made, endorsed or supported by the PdfCraft maintainers; PdfCraft is theirs and keeps its own licence (MIT OR Apache-2.0). Problems in PdfCraft itself belong in [storytold/pdfcraft](https://github.com/storytold/pdfcraft); see [SECURITY.md](SECURITY.md) and [CONTRIBUTING.md](CONTRIBUTING.md) for this repository.
