@@ -1,0 +1,32 @@
+name: Bug report
+description: Something does not work as expected
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: PdfCraft version and commit
+      description: The version PdfCraft shows (Help ▸ About), and the commit you applied the patch to
+      placeholder: PdfCraft 0.21.1, bad6ac7
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Operating system
+      placeholder: Ubuntu 26.04, Windows 11, macOS 15
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what happened instead (tabs, keys, how many PDFs)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Output
+      description: Errors from `git apply` or `cargo`, if the problem is with applying or building the patch
+      render: text
