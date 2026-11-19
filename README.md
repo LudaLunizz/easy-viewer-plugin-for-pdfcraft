@@ -1,4 +1,6 @@
-# PdfCraft multi-PDF viewer mode
+# Easy viewer plugin for PdfCraft
+
+> **Third-party project, not affiliated with PdfCraft.** This is an independent add-on made by [LudaLunizz](https://github.com/LudaLunizz). It is not made, endorsed, sponsored or supported by the PdfCraft authors or by storytold. It only builds on their open-source software: PdfCraft is theirs, and it keeps its own licence and its own name. "PdfCraft" is used here only to say which program this works with.
 
 A "viewer mode" for [PdfCraft](https://github.com/storytold/pdfcraft): a stripped-down, browser-like window with only a tab strip and the page area, for reading several PDFs side by side in tabs.
 
@@ -30,4 +32,4 @@ The four viewer-mode tests pass on that commit (`cargo test -p pdfcraft-ui-egui 
 
 Dual-licensed, like PdfCraft itself: **MIT OR Apache-2.0**, at your option. See [`LICENSE-MIT`](LICENSE-MIT) and [`LICENSE-APACHE`](LICENSE-APACHE). Copyright (c) 2026 LudaLunizz.
 
-This is an unofficial patch. It is not made, endorsed or supported by the PdfCraft maintainers; PdfCraft is theirs and keeps its own licence (MIT OR Apache-2.0). Problems in PdfCraft itself belong in [storytold/pdfcraft](https://github.com/storytold/pdfcraft); see [SECURITY.md](SECURITY.md) and [CONTRIBUTING.md](CONTRIBUTING.md) for this repository.
+This is a third-party, unofficial patch and is not affiliated with PdfCraft. It is not made, endorsed or supported by the PdfCraft maintainers; PdfCraft is theirs and keeps its own licence (MIT OR Apache-2.0). Problems in PdfCraft itself belong in [storytold/pdfcraft](https://github.com/storytold/pdfcraft); see [SECURITY.md](SECURITY.md) and [CONTRIBUTING.md](CONTRIBUTING.md) for this repository.
