@@ -1,5 +1,7 @@
 # Contributing
 
+*Easy viewer plugin for PdfCraft is a third-party project and is not affiliated with PdfCraft or its authors; it only builds on their software.*
+
 Issues and pull requests are welcome. This repository holds one thing: a source
 patch for [PdfCraft](https://github.com/storytold/pdfcraft) that adds a viewer
 mode (see the [README](README.md)).
