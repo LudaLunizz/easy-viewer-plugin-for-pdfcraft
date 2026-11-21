@@ -1,6 +1,6 @@
 # Security policy
 
-*Easy viewer plugin for PdfCraft is a third-party project and is not affiliated with PdfCraft or its authors; it only builds on their software.*
+*EasyView for PdfCraft is a third-party project and is not affiliated with PdfCraft or its authors; it only builds on their software.*
 
 ## Reporting a vulnerability
 

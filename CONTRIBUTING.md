@@ -1,6 +1,6 @@
 # Contributing
 
-*Easy viewer plugin for PdfCraft is a third-party project and is not affiliated with PdfCraft or its authors; it only builds on their software.*
+*EasyView for PdfCraft is a third-party project and is not affiliated with PdfCraft or its authors; it only builds on their software.*
 
 Issues and pull requests are welcome. This repository holds one thing: a source
 patch for [PdfCraft](https://github.com/storytold/pdfcraft) that adds a viewer
@@ -23,7 +23,7 @@ files first).
 git clone https://github.com/storytold/pdfcraft && cd pdfcraft
 git checkout <commit named in the README>
 git apply /path/to/patches/0001-viewer-mode.patch
-cargo test -p pdfcraft-ui-egui --test it viewer_mode      # the four viewer-mode tests
+cargo test -p pdfcraft-ui-egui --test it viewer_mode      # the six viewer-mode tests
 ```
 
 CI (`.github/workflows/ci.yml`) checks that the patch still applies to the
