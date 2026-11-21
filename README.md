@@ -12,8 +12,9 @@ PdfCraft has no plugin system, so this ships as a source patch.
 - **Tabs:** click to switch; close with the ×, a middle click, Ctrl+W or the right-click menu (unsaved changes ask first); Ctrl+Tab / Ctrl+Shift+Tab step through them.
 - **Pages:** Page Up/Down, Home/End, arrows and the wheel work as usual.
 - **My set (the PDFs you read every day):** open them, then press the bookmark button in the viewer strip (or View ▸ Save open tabs as my set). From then on the files button next to it (or View ▸ Open my set in viewer mode) opens them all together in viewer mode. Files already open are not opened twice; moved or deleted files are reported. The set is kept in PdfCraft's own settings, as absolute paths; files never saved to disk are left out.
-- These are registered commands (`view.viewer_mode`, `view.viewer_set.open`, `view.viewer_set.save`), so they are in the palette and the shortcuts list too.
-- Five UI tests in `crates/ui-egui/tests/it/viewer_mode.rs` pass. Tried by hand in a real window by the maintainer: no issues found.
+- **My set at startup:** View ▸ Open my set at startup (a checkbox, off by default) opens the set in viewer mode whenever PdfCraft starts without a file. A PDF you double-click still opens alone.
+- These are registered commands (`view.viewer_mode`, `view.viewer_set.open`, `view.viewer_set.save`, `view.viewer_set.at_start`), so they are in the palette and the shortcuts list too.
+- Six UI tests in `crates/ui-egui/tests/it/viewer_mode.rs` pass. Tried by hand in a real window by the maintainer: no issues found.
 
 ## Apply
 
@@ -27,7 +28,7 @@ git apply /path/to/patches/0001-viewer-mode.patch
 cargo check -p pdfcraft-ui-egui
 ```
 
-The five viewer-mode tests pass on that commit (`cargo test -p pdfcraft-ui-egui --test it viewer_mode`, 21 Nov 2026). On a newer PdfCraft the patch may need small changes; the first one to expect is the Esc handling in `crates/ui-egui/src/app/keys.rs`.
+The six viewer-mode tests pass on that commit (`cargo test -p pdfcraft-ui-egui --test it viewer_mode`, 21 Nov 2026). On a newer PdfCraft the patch may need small changes; the first one to expect is the Esc handling in `crates/ui-egui/src/app/keys.rs`.
 
 ## License
 

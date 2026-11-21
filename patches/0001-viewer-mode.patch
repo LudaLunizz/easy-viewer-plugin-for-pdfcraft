@@ -1,8 +1,20 @@
+diff --git a/apps/pdfcraft/src/main.rs b/apps/pdfcraft/src/main.rs
+index a2a4e4410..89e186937 100644
+--- a/apps/pdfcraft/src/main.rs
++++ b/apps/pdfcraft/src/main.rs
+@@ -543,6 +543,7 @@ fn app_creator<'a>(
+             // With the preference on, last session's files come back first; files named on
+             // the command line open after them, in front (#442).
+             app.reopen_last_files(&files);
++            app.open_viewer_set_at_start(&files);
+             startup::open_files(&mut app, &files, two_paged);
+         }
+         for (k, v) in options {
 diff --git a/crates/engine/src/commands.rs b/crates/engine/src/commands.rs
-index eae8a53e4..7c0d11a35 100644
+index eae8a53e4..4f44c48f8 100644
 --- a/crates/engine/src/commands.rs
 +++ b/crates/engine/src/commands.rs
-@@ -241,6 +241,12 @@ pub const COMMANDS: &[CommandSpec] = &[
+@@ -241,6 +241,13 @@ pub const COMMANDS: &[CommandSpec] = &[
      c("edit.snapshot", "Take a snapshot", EDIT, None, Copying, "camera"),
      c("view.full_screen", "Full screen mode", VIEW, Some(Shortcut::cmd("L")), Document, "maximize"),
      c("view.read_mode", "Read mode", VIEW, Some(Shortcut { command: true, shift: false, mac_ctrl: true, key: "H" }), Document, "book-open"),
@@ -12,11 +24,12 @@ index eae8a53e4..7c0d11a35 100644
 +    // The files read every day, opened together in viewer mode in one click.
 +    c("view.viewer_set.open", "Open my set in viewer mode", VIEW, None, Nothing, "files"),
 +    c("view.viewer_set.save", "Save open tabs as my set", VIEW, None, Document, "bookmark-plus"),
++    c("view.viewer_set.at_start", "Open my set at startup", VIEW, None, Nothing, "clock"),
      // Split view (Acrobat's Window ▸ Split): the current document in two panes, or back to one;
      // a tab's right-click menu also splits right or down with any tab.
      c("view.split", "Split", VIEW, Some(Shortcut::cmd("\\")), Document, "columns-2"),
 diff --git a/crates/ui-egui/src/app.rs b/crates/ui-egui/src/app.rs
-index aa6f2224e..7e4a24588 100644
+index aa6f2224e..44cb648b3 100644
 --- a/crates/ui-egui/src/app.rs
 +++ b/crates/ui-egui/src/app.rs
 @@ -330,6 +330,7 @@ impl PdfCraftApp {
@@ -27,7 +40,7 @@ index aa6f2224e..7e4a24588 100644
              protect_draft: Default::default(),
              text_style_draft: Default::default(),
              boxes_draft: Default::default(),
-@@ -432,7 +433,43 @@ impl PdfCraftApp {
+@@ -432,7 +433,51 @@ impl PdfCraftApp {
  
      /// Read mode and full screen hide the hotbar (the quick tools), and its tools window with it.
      pub(crate) fn hotbar_hidden(&self) -> bool {
@@ -45,6 +58,14 @@ index aa6f2224e..7e4a24588 100644
 +        self.viewer_mode.set = self.open_session().files.into_iter().map(|f| f.path).collect();
 +        let n = self.viewer_mode.set.len();
 +        self.notify(format!("{n} {} saved as your set", if n == 1 { "file" } else { "files" }));
++    }
++
++    /// At startup: open "my set" in viewer mode when that is switched on and no file was named
++    /// to open (a double-clicked PDF opens alone).
++    pub fn open_viewer_set_at_start(&mut self, files: &[String]) {
++        if self.viewer_mode.at_start && files.is_empty() && !self.viewer_mode.set.is_empty() {
++            self.open_viewer_set();
++        }
 +    }
 +
 +    /// Open every file of "my set" (a tab already showing one is reused) and switch to viewer mode.
@@ -72,7 +93,7 @@ index aa6f2224e..7e4a24588 100644
      }
  
      /// The pages are covered, and no page key reaches them, a menu click's included: by a dialog or
-@@ -873,6 +910,24 @@ impl PdfCraftApp {
+@@ -873,6 +918,24 @@ impl PdfCraftApp {
          if self.draws_window_frame() {
              window_controls::resize_edges(&ctx);
          }
@@ -113,23 +134,27 @@ index d85470951..3957c3146 100644
              if page_chords && chords {
                  self.select_all_keys(i, ctx);
 diff --git a/crates/ui-egui/src/app/prefs.rs b/crates/ui-egui/src/app/prefs.rs
-index 618c3e017..c021786ef 100644
+index 618c3e017..84e83301d 100644
 --- a/crates/ui-egui/src/app/prefs.rs
 +++ b/crates/ui-egui/src/app/prefs.rs
-@@ -95,6 +95,7 @@ impl PdfCraftApp {
+@@ -95,6 +95,8 @@ impl PdfCraftApp {
              "docking_right": self.right,
              "recent": self.recent.iter().take(self.recent_limit).collect::<Vec<_>>(),
              "reopen_last_session": self.reopen_last_session,
 +            "viewer_set": self.viewer_mode.set,
++            "viewer_set_at_start": self.viewer_mode.at_start,
              "restore_last_view": self.restore_last_view,
              "last_views": self.last_views_to_save(),
              // Kept only while the preference is on.
-@@ -244,6 +245,9 @@ impl PdfCraftApp {
+@@ -244,6 +246,12 @@ impl PdfCraftApp {
              self.recent_limit = usize::try_from(limit).map_or(crate::RECENT_FILES_MAX, |n| n.min(crate::RECENT_FILES_MAX));
          }
          self.recent.truncate(self.recent_limit);
 +        if let Ok(set) = serde_json::from_value::<Vec<String>>(v["viewer_set"].clone()) {
 +            self.viewer_mode.set = set;
++        }
++        if let Some(on) = v["viewer_set_at_start"].as_bool() {
++            self.viewer_mode.at_start = on;
 +        }
          self.restore_layout_prefs(&v);
          self.restore_behavior_prefs(&v);
@@ -318,16 +343,17 @@ index 4c632d39e..c942c7b9f 100644
              picked = Some(id);
          }
 diff --git a/crates/ui-egui/src/commands.rs b/crates/ui-egui/src/commands.rs
-index e67fe3680..16661854a 100644
+index e67fe3680..b2eacd12c 100644
 --- a/crates/ui-egui/src/commands.rs
 +++ b/crates/ui-egui/src/commands.rs
-@@ -346,6 +346,9 @@ impl PdfCraftApp {
+@@ -346,6 +346,10 @@ impl PdfCraftApp {
                  }
              }
              "view.read_mode" => self.switch_mode(if self.mode == Mode::Read { Mode::AllTools } else { Mode::Read }, false),
 +            "view.viewer_mode" => self.toggle_viewer_mode(),
 +            "view.viewer_set.open" => self.open_viewer_set(),
 +            "view.viewer_set.save" => self.save_viewer_set(),
++            "view.viewer_set.at_start" => self.viewer_mode.at_start = !self.viewer_mode.at_start,
              "view.split" => self.toggle_split(),
              crate::viewer_prefs::TOGGLE => self.toggle_interface(),
              "view.previous_view" | "view.next_view" => {
@@ -351,32 +377,40 @@ index 6a6062093..81ba36560 100644
 +    pub viewer_mode: ViewerMode,
  }
 diff --git a/crates/ui-egui/src/menus.rs b/crates/ui-egui/src/menus.rs
-index ca3eeca90..b89c7b602 100644
+index ca3eeca90..ee1416e43 100644
 --- a/crates/ui-egui/src/menus.rs
 +++ b/crates/ui-egui/src/menus.rs
-@@ -174,7 +174,8 @@ const DISPLAY: &[&str] = &[
+@@ -174,7 +174,15 @@ const DISPLAY: &[&str] = &[
  const THEMES: &[&str] = &["view.theme.system", "view.theme.light", "view.theme.dark"];
  const PANES: &[&str] = &["view.side_panel", "view.tools_pane", "view.split"];
  const PANE_COMMANDS: &[&str] = &["comment.list", "form.fields", "ui.dock.reset"];
 -const MODES: &[&str] = &["view.full_screen", "view.read_mode", crate::viewer_prefs::TOGGLE];
-+const MODES: &[&str] =
-+    &["view.full_screen", "view.read_mode", "view.viewer_mode", "view.viewer_set.open", "view.viewer_set.save", crate::viewer_prefs::TOGGLE];
++const MODES: &[&str] = &[
++    "view.full_screen",
++    "view.read_mode",
++    "view.viewer_mode",
++    "view.viewer_set.open",
++    "view.viewer_set.save",
++    "view.viewer_set.at_start",
++    crate::viewer_prefs::TOGGLE,
++];
  const PAGES: &[&str] = &[
      "page.organize",
      SEP,
-@@ -523,6 +524,7 @@ impl PdfCraftApp {
+@@ -523,6 +531,8 @@ impl PdfCraftApp {
              "view.layout.cover" => Some(view.is_some_and(|v| v.cover)),
              "view.full_screen" => Some(self.full_screen),
              "view.read_mode" => Some(self.mode == crate::Mode::Read),
 +            "view.viewer_mode" => Some(self.viewer_mode.enabled),
++            "view.viewer_set.at_start" => Some(self.viewer_mode.at_start),
              "view.side_panel" => Some(self.right.is_some()),
              "view.tools_pane" => Some(self.left_open),
              "view.split" => Some(self.panes.split.is_some()),
 diff --git a/crates/ui-egui/src/state.rs b/crates/ui-egui/src/state.rs
-index 8d524ad85..7afeec0c8 100644
+index 8d524ad85..81ae67969 100644
 --- a/crates/ui-egui/src/state.rs
 +++ b/crates/ui-egui/src/state.rs
-@@ -495,3 +495,21 @@ pub enum OpenOutcome {
+@@ -495,3 +495,23 @@ pub enum OpenOutcome {
      /// The file could not be read or opened; the user was told.
      Failed,
  }
@@ -387,6 +421,8 @@ index 8d524ad85..7afeec0c8 100644
 +    pub enabled: bool,
 +    /// "My set": the files saved to open together in viewer mode, absolute paths, kept in settings.
 +    pub set: Vec<String>,
++    /// Open "my set" when PdfCraft starts without files to open.
++    pub at_start: bool,
 +}
 +
 +impl ViewerMode {
@@ -411,10 +447,10 @@ index a5716e649..1c509a8ec 100644
  mod xfa;
 diff --git a/crates/ui-egui/tests/it/viewer_mode.rs b/crates/ui-egui/tests/it/viewer_mode.rs
 new file mode 100644
-index 000000000..6e5fd56f3
+index 000000000..ddd34dc8b
 --- /dev/null
 +++ b/crates/ui-egui/tests/it/viewer_mode.rs
-@@ -0,0 +1,173 @@
+@@ -0,0 +1,198 @@
 +//! Viewer mode (`view.viewer_mode`): a tabs-and-pages window for reading several PDFs. A button in
 +//! the title bar, ⌘E (Ctrl+E) and the View menu turn it on; Esc, the strip's button and ⌘E turn it
 +//! off. Its tabs close with their ×, a middle click, ⌘W and the tab's menu, and Ctrl+Tab steps
@@ -586,5 +622,30 @@ index 000000000..6e5fd56f3
 +    assert_eq!(open.len(), 2, "b.pdf, already open, is not opened twice");
 +    assert!(open.contains(&files[0]) && open.contains(&files[1]));
 +    assert!(later.viewer_mode.enabled, "the set opens in viewer mode");
++    let _ = std::fs::remove_dir_all(&dir);
++}
++
++#[test]
++fn my_set_opens_at_startup_when_switched_on_and_no_file_was_named() {
++    let dir = std::env::temp_dir().join(format!("pdfcraft-viewer-set-start-{}", std::process::id()));
++    std::fs::create_dir_all(&dir).unwrap();
++    let a = dir.join("a.pdf");
++    std::fs::write(&a, PDF).unwrap();
++    let a = a.to_string_lossy().into_owned();
++    let mut app = PdfCraftApp::new();
++    app.viewer_mode.set = vec![a.clone()];
++    app.open_viewer_set_at_start(&[]);
++    assert!(app.views.is_empty(), "off by default");
++    app.execute("view.viewer_set.at_start");
++    let settings = app.persist();
++
++    let mut later = PdfCraftApp::new();
++    later.restore(&settings);
++    assert!(later.viewer_mode.at_start, "the switch is kept in settings");
++    later.open_viewer_set_at_start(&["/x/named.pdf".into()]);
++    assert!(later.views.is_empty(), "a file named at launch opens alone");
++    later.open_viewer_set_at_start(&[]);
++    assert_eq!(later.views.len(), 1);
++    assert!(later.viewer_mode.enabled, "and in viewer mode");
 +    let _ = std::fs::remove_dir_all(&dir);
 +}
